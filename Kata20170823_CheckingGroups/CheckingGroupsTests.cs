@@ -50,6 +50,24 @@ namespace Kata20170823_CheckingGroups
             CheckGroupsShouldBeFalse("([})");
         }
 
+        [TestMethod]
+        public void input_random_1_should_return_true()
+        {
+            CheckGroupsShouldBeTrue("[[]()]");
+        }
+
+        [TestMethod]
+        public void input_random_2_should_return_true()
+        {
+            CheckGroupsShouldBeFalse("{)[}");
+        }
+
+        [TestMethod]
+        public void input_random_3_should_return_true()
+        {
+            CheckGroupsShouldBeTrue("{[{}[]()[]{}{}{}{}{}{}()()()()()()()()]{{{[[[((()))]]]}}}}(())[[]]{{}}[][][][][][][]({[]})");
+        }
+
         private static void CheckGroupsShouldBeFalse(string input)
         {
             var groups = new Groups();
@@ -69,33 +87,14 @@ namespace Kata20170823_CheckingGroups
     {
         public bool Check(string input)
         {
-            while (true)
+            var prevString = "";
+            while (input.Length != prevString.Length)
             {
-                if (CheckFirstAndLast(input))
-                {
-                    if (input.Length == 2)
-                    {
-                        return true;
-                    }
-
-                    input = input.Substring(1, input.Length - 2);
-                    continue;
-                }
-
-                return false;
+                prevString = input;
+                input = input.Replace("[]", "").Replace("()", "").Replace("{}", "");
             }
-        }
 
-        private static bool CheckFirstAndLast(string input)
-        {
-            var dic = new Dictionary<char, char>
-            {
-                { '(', ')' },
-                { '[', ']' },
-                { '{', '}' }
-            };
-
-            return dic[input.First()] == input.Last();
+            return input.Length == 0;
         }
     }
 }
