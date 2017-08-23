@@ -19,6 +19,12 @@ namespace Kata20170823_CheckingGroups
             CheckGroupsShouldBeFalse("({");
         }
 
+        [TestMethod]
+        public void input_L_square_brackets_R_square_brackets_should_return_true()
+        {
+            CheckGroupsShouldBeTrue("[]");
+        }
+
         private static void CheckGroupsShouldBeFalse(string input)
         {
             var groups = new Groups();
@@ -41,7 +47,8 @@ namespace Kata20170823_CheckingGroups
         {
             var dic = new Dictionary<char, char>
             {
-                { '(', ')' }
+                { '(', ')' },
+                { '[', ']' },
             };
 
             return dic[input[0]] == input[1];
