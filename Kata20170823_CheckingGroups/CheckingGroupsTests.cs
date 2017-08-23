@@ -25,6 +25,12 @@ namespace Kata20170823_CheckingGroups
             CheckGroupsShouldBeTrue("[]");
         }
 
+        [TestMethod]
+        public void input_L_curly_brackets_R_curly_brackets_should_return_true()
+        {
+            CheckGroupsShouldBeTrue("{}");
+        }
+
         private static void CheckGroupsShouldBeFalse(string input)
         {
             var groups = new Groups();
@@ -49,6 +55,7 @@ namespace Kata20170823_CheckingGroups
             {
                 { '(', ')' },
                 { '[', ']' },
+                { '{', '}' }
             };
 
             return dic[input[0]] == input[1];
